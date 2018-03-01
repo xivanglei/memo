@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/edit_background">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="#0000"
+                android:layout_centerInParent="true"
+                android:textColor="@color/button"
+                android:text="完成"/>
+
+            <Button
+                android:id="@+id/cancel"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="#0000"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/button"
+                android:drawableLeft="@drawable/ic_back"
+                android:text="取消"/>
+
+            <Button
+                android:id="@+id/eliminate"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:textColor="@color/button"
+                android:text="清除"/>
+
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/edit_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top"
+                android:padding="15dp"
+                android:hint="请输入"
+                android:textSize="25dp"
+                android:textColor="@color/editText"
+                android:background="@null" />
+        </ScrollView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/gray"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/picture"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="2"/>
+
+            <ImageButton
+                android:id="@+id/video_play"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:src="@drawable/play"
+                android:layout_gravity="center"
+                android:background="#0000"
+                android:layout_weight="1"/>
+
+            <ImageButton
+                android:id="@+id/audio_play"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/play"
+                android:layout_gravity="center"
+                android:background="#0000"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/photo_album"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#0000"
+                android:textColor="@color/button"
+                android:text="相册"/>
+
+            <Button
+                android:id="@+id/take_photo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#0000"
+                android:textColor="@color/button"
+                android:text="拍照"/>
+
+            <Button
+                android:id="@+id/record_video"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#0000"
+                android:textColor="@color/button"
+                android:text="拍视频"/>
+
+            <Button
+                android:id="@+id/record_audio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#0000"
+                android:textColor="@color/button"
+                android:text="录音"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.mymemo.RecordVideo">
+
+    <SurfaceView
+        android:id="@+id/surface_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#0000">
+
+        <Button
+            android:id="@+id/start_stop_record"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#0000"
+            android:textColor="@color/button"
+            android:text="开始录制"/>
+
+        <Button
+            android:id="@+id/play_video"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#0000"
+            android:textColor="@color/button"
+            android:text="播放"/>
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#0000"
+            android:textColor="@color/button"
+            android:text="取消"/>
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#0000"
+            android:textColor="@color/button"
+            android:text="储存"/>
+
+    </LinearLayout>
+
+    <Chronometer
+        android:id="@+id/ch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0000"
+        android:textColor="#FFFF00"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"/>
+
+
+</FrameLayout>

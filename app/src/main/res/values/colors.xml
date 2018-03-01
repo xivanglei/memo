@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#00a49c3e</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="button">#594318</color>
+    <color name="editText">#6e6363</color>
+    <color name="edit_background">#e7e7d6</color>
+    <color name="white">#ffffff</color>
+    <color name="card">#2e6e6e49</color>
+    <color name="gray">#bcb9b9</color>
+</resources>

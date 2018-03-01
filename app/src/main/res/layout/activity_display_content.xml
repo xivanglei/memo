@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/edit_background">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/display_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:drawableLeft="@drawable/ic_back"/>
+
+            <TextView
+                android:id="@+id/amendment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:text="修改"
+                android:textColor="@color/button"
+                android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <EditText
+                android:id="@+id/display_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:background="@null" />
+        </ScrollView>
+
+        <Button
+            android:id="@+id/option_remind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#0000"
+            android:layout_gravity="center"
+            android:textColor="@color/button"
+            android:textSize="20dp"
+            android:text="继续提醒"/>
+
+        <TextView
+            android:id="@+id/remind_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/button"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/gray"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/display_picture"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"/>
+
+            <ImageButton
+                android:id="@+id/video_play"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:src="@drawable/play"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#0000"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/audio_play"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/play"
+                    android:layout_gravity="center"
+                    android:background="#0000"/>
+
+                <TextView
+                    android:id="@+id/audio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:gravity="center"
+                    android:text="录音"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
