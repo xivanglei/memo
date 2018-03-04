@@ -8,6 +8,8 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -63,6 +65,12 @@ public class DisplayContent extends AppCompatActivity implements View.OnClickLis
 
     private long mRemindDate;
 
+    private static final int UPDATE_AUDIO = 0x11;
+
+    private static final int UPDATE_PICTURE = 0x12;
+
+    private static final int UPDATE_VIDEO = 0x13;
+
     SimpleDateFormat format = new SimpleDateFormat("MM月dd日 HH:mm");
 
     public static void actionStart(Context context, int id) {
@@ -112,12 +120,38 @@ public class DisplayContent extends AppCompatActivity implements View.OnClickLis
     public void initData() {
         selectSQL();
         if(picturePath != null) {
-            Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
-            displayPicture.setImageBitmap(bitmap);
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(100);
+                        Message message = Message.obtain();
+                        message.what = UPDATE_PICTURE;
+                        handler.sendMessage(message);
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            thread.setPriority(2);
+            thread.start();
         }
         if(videoPath != null) {
-            videoPlay.setVisibility(View.VISIBLE);
-            EditActivity.displayVideoPicture(videoPlay, videoPath);
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(100);
+                        Message message = Message.obtain();
+                        message.what = UPDATE_VIDEO;
+                        handler.sendMessage(message);
+                    } catch(Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            thread.setPriority(2);
+            thread.start();
         }
         if(audioPath != null) {
             audioPlay.setVisibility(View.VISIBLE);
@@ -228,6 +262,27 @@ public class DisplayContent extends AppCompatActivity implements View.OnClickLis
                 date, 1, id));
     }
 
+    private Handler handler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch(msg.what) {
+                case UPDATE_AUDIO:
+                    break;
+                case UPDATE_PICTURE:
+                    Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+                    displayPicture.setImageBitmap(bitmap);
+                    break;
+                case UPDATE_VIDEO:
+                    videoPlay.setVisibility(View.VISIBLE);
+                    EditActivity.displayVideoPicture(videoPlay, videoPath);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
     private void optionDialog() {
         final String[] items = new String[] {"10分钟后提醒！", "30分钟后提醒！",
                 "1小时后提醒！", "2小时后提醒！", "完成并删除！"};
@@ -290,7 +345,6 @@ public class DisplayContent extends AppCompatActivity implements View.OnClickLis
         return intent;
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -298,5 +352,4 @@ public class DisplayContent extends AppCompatActivity implements View.OnClickLis
             MediaPlay.audioDestroy(mediaPlayer);
         }
     }
-
 }

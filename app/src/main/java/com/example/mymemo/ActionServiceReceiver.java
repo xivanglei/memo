@@ -48,7 +48,7 @@ public class ActionServiceReceiver extends BroadcastReceiver {
             Uri sound= Uri.parse("android.resource://com.example.mymemo/" + R.raw.notification);
             Notification notification = new NotificationCompat.Builder(mContext)
                     .setAutoCancel(true)
-                    .setSmallIcon(R.drawable.apple)
+                    .setSmallIcon(R.mipmap.note)
                     .setContentTitle("别忘了" + creationDate + "的提醒")
                     .setContentText(content)
                     .setWhen(System.currentTimeMillis())

@@ -15,6 +15,8 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -123,42 +125,65 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
             edit.setSelection(draft.length());
         }
         mFile = new File(Directory.getDirectory(this, filedId, Directory.DIRECTORY));
-        if(mFile.exists()) {
-            File[] fileArray = mFile.listFiles();
-            if (fileArray != null) {
-                for (File fileItem : fileArray) {
-                    String folder = fileItem.getAbsolutePath().substring(fileItem.getAbsolutePath().lastIndexOf("/") + 1);
-                    File[] fileArrayB = fileItem.listFiles();
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(100);
+                    Message message = Message.obtain();
+                    message.what = 1;
+                    handler.sendMessage(message);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.setPriority(2);
+        thread.start();
+    }
 
-                    switch (folder) {
-                        case Directory.VIDEO_DIRECTORY:
-                            if(fileArrayB.length > 0) {
-                                videoPath = fileArrayB[0].getAbsolutePath();
-                                videoPlay.setVisibility(View.VISIBLE);
-                                displayVideoPicture(videoPlay, videoPath);
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 1) {
+                if (mFile.exists()) {
+                    File[] fileArray = mFile.listFiles();
+                    if (fileArray.length != 0) {
+                        for (File fileItem : fileArray) {
+                            String folder = fileItem.getAbsolutePath().substring(fileItem.getAbsolutePath().lastIndexOf("/") + 1);
+                            File[] fileArrayB = fileItem.listFiles();
+
+                            switch (folder) {
+                                case Directory.VIDEO_DIRECTORY:
+                                    if (fileArrayB.length > 0) {
+                                        videoPath = fileArrayB[0].getAbsolutePath();
+                                        videoPlay.setVisibility(View.VISIBLE);
+                                        displayVideoPicture(videoPlay, videoPath);
+                                    }
+                                    break;
+                                case Directory.AUDIO_DIRECTORY:
+                                    if (fileArrayB.length > 0) {
+                                        audioPath = fileArrayB[0].getAbsolutePath();
+                                        audioPlay.setVisibility(View.VISIBLE);
+                                    }
+                                    break;
+                                case Directory.PICTURE_DIRECTORY:
+                                    if (fileArrayB.length > 0) {
+                                        picturePath = fileArrayB[0].getAbsolutePath();
+                                        picture.setEnabled(true);
+                                        Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+                                        picture.setImageBitmap(bitmap);
+                                    }
+                                    break;
+                                default:
+                                    break;
                             }
-                            break;
-                        case Directory.AUDIO_DIRECTORY:
-                            if(fileArrayB.length > 0) {
-                                audioPath = fileArrayB[0].getAbsolutePath();
-                                audioPlay.setVisibility(View.VISIBLE);
-                            }
-                            break;
-                        case Directory.PICTURE_DIRECTORY:
-                            if(fileArrayB.length > 0) {
-                                picturePath = fileArrayB[0].getAbsolutePath();
-                                picture.setEnabled(true);
-                                Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
-                                picture.setImageBitmap(bitmap);
-                            }
-                            break;
-                        default:
-                            break;
+                        }
                     }
                 }
             }
         }
-    }
+    };
 
     @Override
     public void onClick(View v) {

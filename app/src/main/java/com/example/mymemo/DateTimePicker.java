@@ -23,7 +23,7 @@ public class DateTimePicker extends FrameLayout {
 
     private OnDateTimeChangedListener mOnDateTimeChangedListener;
 
-    public DateTimePicker(Context context) {
+    public DateTimePicker(final Context context) {
         super(context);
         mDate = Calendar.getInstance();
         inflate(context, R.layout.date_time_picker, this);
@@ -44,7 +44,11 @@ public class DateTimePicker extends FrameLayout {
                     }
                     mHourSpinner.setWrapSelectorWheel(true);
                 } else if(mDate.get(Calendar.DAY_OF_YEAR) == Calendar.getInstance().get(Calendar.DAY_OF_YEAR)) {
-                    mHourSpinner.setMinValue(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
+                    if(DateFormat.is24HourFormat(context)) {
+                        mHourSpinner.setMinValue(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
+                    } else {
+                        mHourSpinner.setMinValue(Calendar.getInstance().get(Calendar.HOUR));
+                    }
                     mHourSpinner.setWrapSelectorWheel(false);
                 }
                 updateDateControl();
@@ -52,15 +56,19 @@ public class DateTimePicker extends FrameLayout {
             }
         });
         mDateSpinner.setWrapSelectorWheel(false);
+        mDateSpinner.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
         mHourSpinner = (NumberPicker) findViewById(R.id.up_hour);
-        mHourSpinner.setMinValue(mDate.get(Calendar.HOUR_OF_DAY));
+
         if(DateFormat.is24HourFormat(context)) {
+            mHourSpinner.setMinValue(mDate.get(Calendar.HOUR_OF_DAY));
             mHourSpinner.setMaxValue(23);
+            mHourSpinner.setValue(mDate.get(Calendar.HOUR_OF_DAY));
         } else {
+            mHourSpinner.setMinValue(mDate.get(Calendar.HOUR));
             mHourSpinner.setMaxValue(12);
+            mHourSpinner.setValue(mDate.get(Calendar.HOUR));
         }
-        mHourSpinner.setValue(mDate.get(Calendar.HOUR_OF_DAY));
         mHourSpinner.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
@@ -76,6 +84,7 @@ public class DateTimePicker extends FrameLayout {
             }
         });
         mHourSpinner.setWrapSelectorWheel(false);
+        mHourSpinner.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
         mMinuteSpinner = (NumberPicker) findViewById(R.id.up_minute);
         mMinuteSpinner.setMinValue(mDate.get(Calendar.MINUTE));
@@ -89,6 +98,7 @@ public class DateTimePicker extends FrameLayout {
             }
         });
         mMinuteSpinner.setWrapSelectorWheel(false);
+        mMinuteSpinner.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
 
     }
 

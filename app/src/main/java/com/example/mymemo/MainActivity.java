@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = new Intent(this, RemindService.class);
+        startService(intent);
         MyDatabase.MEMOSQL = new MyDatabase(this, "MyMemo", null, 5);
         MyDatabase.DB = MyDatabase.MEMOSQL.getWritableDatabase();
         initData();

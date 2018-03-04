@@ -58,10 +58,9 @@ public class DateTimePickerDialog extends AlertDialog {
 
     private void updateTitle() {
         int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR |
-                DateUtils.FORMAT_SHOW_WEEKDAY;
-        String title1 = DateUtils.formatDateTime(this.getContext(), mDate.getTimeInMillis(), flags);
-        String title2 = DateUtils.formatDateTime(this.getContext(), mDate.getTimeInMillis(), DateUtils.FORMAT_SHOW_TIME);
-        setTitle(title1 + "\n" + title2);
+                DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_SHOW_TIME;
+        String title = DateUtils.formatDateTime(this.getContext(), mDate.getTimeInMillis(), flags);
+        setTitle(title);
     }
 
     public interface OnDateTimeSetListener {
