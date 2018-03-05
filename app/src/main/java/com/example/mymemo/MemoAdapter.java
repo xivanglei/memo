@@ -125,6 +125,9 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder> {
                         EditActivity.deleteFile(file);
                         mMemoList.remove(position);
                         notifyDataSetChanged();
+                        if(mOnSaveListener != null) {
+                            mOnSaveListener.deleteData(position);
+                        }
                     }
                 });
                 dialog.setPositiveButton("已完成", new DialogInterface.OnClickListener() {
@@ -201,6 +204,7 @@ public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.ViewHolder> {
 
     public interface OnSaveListener {
         void onClick();
+        void deleteData(int position);
     }
 
     public void setOnSaveListener(OnSaveListener callback) {

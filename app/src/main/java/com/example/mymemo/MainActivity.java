@@ -94,12 +94,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 initData();
                 layUpAdapter.notifyDataSetChanged();
             }
+            @Override
+            public void deleteData(int position) {
+                tempMemoList.remove(position);
+            }
+
         });
         memo.setAdapter(adapter);
         RecyclerView layUp = (RecyclerView) findViewById(R.id.lay_up_list);
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(this);
         layUp.setLayoutManager(layoutManager2);
         layUpAdapter = new MemoAdapter(layUpList, this, R.layout.lay_up_item);
+        layUpAdapter.setOnSaveListener(new MemoAdapter.OnSaveListener() {
+            @Override
+            public void onClick() {}
+            @Override
+            public void deleteData(int position) {
+                tempLayUpList.remove(position);
+            }
+        });
         layUp.setAdapter(layUpAdapter);
         search = (EditText) findViewById(R.id.search);
         search.addTextChangedListener(new TextWatcher() {
@@ -111,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String key = search.getText().toString();
+
                 if(StringUtils.isBlank(key)) {
                     memoList.clear();
                     layUpList.clear();
